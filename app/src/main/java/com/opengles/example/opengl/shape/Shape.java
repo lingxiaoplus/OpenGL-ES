@@ -2,15 +2,14 @@ package com.opengles.example.opengl.shape;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 import android.view.View;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import com.opengles.example.opengl.ContentValue;
 
 public abstract class Shape implements GLSurfaceView.Renderer {
 
     protected View mView;
-
     public Shape(View view){
         this.mView = view;
     }
@@ -23,4 +22,7 @@ public abstract class Shape implements GLSurfaceView.Renderer {
         GLES20.glCompileShader(shader);
         return shader;
     }
+    public void onSetPicType(int picType) {
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
+import com.opengles.example.opengl.ContentValue;
 import com.opengles.example.opengl.gl.MGLRender;
 import com.opengles.example.opengl.shape.Shape;
 
@@ -35,4 +36,8 @@ public class MGLSurfaceView extends GLSurfaceView {
             e.printStackTrace();
         }
     }
+    public void setPicType(int picType){
+        renderer.setPicType(picType);
+    }
+
 }

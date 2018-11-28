@@ -4,7 +4,6 @@ import android.opengl.GLES20;
 import android.util.Log;
 import android.view.View;
 
-import com.opengles.example.opengl.shape.CubeShape;
 import com.opengles.example.opengl.shape.Shape;
 import com.opengles.example.opengl.shape.TriangleShape;
 
@@ -21,6 +20,8 @@ public class MGLRender extends Shape {
     public void setShape(Class<? extends Shape> shape){
         this.clazz = shape;
     }
+
+
     public MGLRender(View view) {
         super(view);
     }
@@ -54,5 +55,9 @@ public class MGLRender extends Shape {
         Log.e(TAG,"onDrawFrame");
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
         shape.onDrawFrame(gl);
+    }
+
+    public void setPicType(int picType) {
+        shape.onSetPicType(picType);
     }
 }

@@ -8,6 +8,7 @@ import android.opengl.Matrix;
 import android.util.Log;
 import android.view.View;
 
+import com.opengles.example.opengl.ContentValue;
 import com.opengles.example.opengl.R;
 import com.opengles.example.opengl.utils.ShaderUtil;
 
@@ -55,8 +56,6 @@ public class PictureShape extends Shape {
         mScoordBuffer = sCoordBuffer.asFloatBuffer();
         mScoordBuffer.put(sCoord);
         mScoordBuffer.position(0);
-
-
     }
 
     @Override
@@ -92,6 +91,15 @@ public class PictureShape extends Shape {
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectMatrix, 0, mViewMatrix, 0);
     }
 
+
+    private int mPictureType;
+    @Override
+    public void onSetPicType(int picType) {
+        super.onSetPicType(picType);
+        this.mPictureType = picType;
+        Log.e(TAG, "图片类型: "+mPictureType);
+    }
+
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
@@ -106,6 +114,28 @@ public class PictureShape extends Shape {
         int glHTexture = GLES20.glGetUniformLocation(mProgram, "vTexture");
         GLES20.glUniform1i(glHTexture, 0);
 
+        int changeType = GLES20.glGetUniformLocation(mProgram,"vChangeType");
+        int changeColor = GLES20.glGetUniformLocation(mProgram,"vChangeColor");
+        switch (mPictureType){
+            case ContentValue.TYPE_ORIGIN:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.ORIGIN.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.ORIGIN.getColorData(),1);
+                break;
+            case ContentValue.TYPE_GRAY:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.GRAY.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.GRAY.getColorData(),1);
+                break;
+            case ContentValue.TYPE_COOL:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.COOL.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.COOL.getColorData(),1);
+                break;
+            case ContentValue.TYPE_WARM:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.WARM.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.WARM.getColorData(),1);
+                break;
+            default:
+                break;
+        }
         int textureId = createTexture();
         Log.d(TAG, "生成纹理返回的纹理id: "+textureId);
         //传入顶点坐标
