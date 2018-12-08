@@ -116,6 +116,9 @@ public class PictureShape extends Shape {
 
         int changeType = GLES20.glGetUniformLocation(mProgram,"vChangeType");
         int changeColor = GLES20.glGetUniformLocation(mProgram,"vChangeColor");
+
+        //int hIsHalf = GLES20.glGetUniformLocation(mProgram,"vIsHalf");
+        //GLES20.glUniform1i(hIsHalf,1);
         switch (mPictureType){
             case ContentValue.TYPE_ORIGIN:
                 GLES20.glUniform1i(changeType,ContentValue.Filter.ORIGIN.getType());
@@ -132,6 +135,10 @@ public class PictureShape extends Shape {
             case ContentValue.TYPE_WARM:
                 GLES20.glUniform1i(changeType,ContentValue.Filter.WARM.getType());
                 GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.WARM.getColorData(),1);
+                break;
+            case ContentValue.TYPE_BLUR:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.BLUR.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.BLUR.getColorData(),1);
                 break;
             default:
                 break;

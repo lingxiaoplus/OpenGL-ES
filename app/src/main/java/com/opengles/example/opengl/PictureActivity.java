@@ -57,7 +57,7 @@ public class PictureActivity extends BaseActivity {
                 mGLSurfaceView.setPicType(ContentValue.TYPE_COOL);
                 break;
             case R.id.hot:
-                mGLSurfaceView.setPicType(ContentValue.TYPE_COOL);
+                mGLSurfaceView.setPicType(ContentValue.TYPE_WARM);
                 break;
             case R.id.blur:
                 mGLSurfaceView.setPicType(ContentValue.TYPE_BLUR);
