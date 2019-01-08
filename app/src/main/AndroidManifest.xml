@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.opengles.example.opengl">
-
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".CubeActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".PictureActivity"></activity>
+        <activity android:name=".PictureActivity" />
+        <activity android:name=".CameraActivity"></activity>
     </application>
 
 </manifest>

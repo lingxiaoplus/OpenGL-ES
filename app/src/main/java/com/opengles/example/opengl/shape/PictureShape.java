@@ -140,6 +140,10 @@ public class PictureShape extends Shape {
                 GLES20.glUniform1i(changeType,ContentValue.Filter.BLUR.getType());
                 GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.BLUR.getColorData(),1);
                 break;
+            case ContentValue.TYPE_MAGN:
+                GLES20.glUniform1i(changeType,ContentValue.Filter.MAGN.getType());
+                GLES20.glUniform3fv(changeColor,0,ContentValue.Filter.MAGN.getColorData(),1);
+                break;
             default:
                 break;
         }

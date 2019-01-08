@@ -34,7 +34,15 @@ public class CubeActivity extends BaseActivity {
                 showSelectDia();
             }
         });
+        setActBarTitle("几何形状");
     }
+
+
+    @Override
+    protected boolean setShowActionBarBack() {
+        return true;
+    }
+
     @Override
     protected void onPause() {
         super.onPause();

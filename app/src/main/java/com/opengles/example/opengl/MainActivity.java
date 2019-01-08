@@ -1,10 +1,14 @@
 package com.opengles.example.opengl;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.pm.ConfigurationInfo;
+import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,6 +40,7 @@ public class MainActivity extends BaseActivity {
         }*/
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        checkPermission();
     }
 
     @Override
@@ -57,7 +62,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -80,5 +85,24 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.button_pcture)
     public void onPictureClick(){
         startActivity(new Intent(getApplicationContext(),PictureActivity.class));
+    }
+    @OnClick(R.id.button_camera)
+    public void onCameraPreview(){
+        startActivity(new Intent(getApplicationContext(),CameraActivity.class));
+    }
+
+    //获取摄像头权限
+    private void checkPermission(){
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            //申请权限，REQUEST_TAKE_PHOTO_PERMISSION是自定义的常量
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CAMERA},
+                    100);
+        }
     }
 }

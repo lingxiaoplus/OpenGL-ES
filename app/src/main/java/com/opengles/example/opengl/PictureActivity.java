@@ -20,6 +20,14 @@ public class PictureActivity extends BaseActivity {
         mGLSurfaceView = new MGLSurfaceView(this);
         mFrameLayout.addView(mGLSurfaceView);
         mGLSurfaceView.setShape(PictureShape.class);
+
+        setActBarTitle("图片处理");
+    }
+
+
+    @Override
+    protected boolean setShowActionBarBack() {
+        return true;
     }
 
     @Override
@@ -69,6 +77,6 @@ public class PictureActivity extends BaseActivity {
                 break;
         }
         mGLSurfaceView.requestRender();
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }
